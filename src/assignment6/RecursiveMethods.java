@@ -11,8 +11,18 @@ public class RecursiveMethods {
 	 */
 	public static double exponent(int base, int exp) {
 		
-			// FIXME Recursively compute base^exp
-			return 0;
+			//Base Case
+			if (exp == 0){
+				return 1;
+			}
+
+			//Case: Exponent is Negetive
+			if (exp < 0){
+				return 1.0/exponent(base, -exp);
+			}
+
+			//Case: Exponent is Positive
+			return 1.0*base*exponent(base, exp - 1);
 			
 	}
 
@@ -25,10 +35,19 @@ public class RecursiveMethods {
 	 * @return the sum of the elements in values
 	 */
 	public static int arraySum(int[] array) {
-		
-			// FIXME: Recursively compute the sum of the values in an array
+			return arraySumHelper(array, 0);		
+	}
+
+	public static int arraySumHelper(int[] array, int index){
+		if (array.length == 0){
 			return 0;
-			
+		}
+		
+		if (index == array.length-1){
+			return array[index];
+		}
+		
+		return array[index] + arraySumHelper(array, index+1);
 	}
 
 	/**
@@ -39,9 +58,17 @@ public class RecursiveMethods {
 	 */
 	public static String dragon(int n) {
 		
-			// FIXME Recursively compute dragon curves
-			return "";
+		return dragonHelper("F-H", n);
 			
+	}
+
+	public static String dragonHelper(String str, int n) {
+		//Base Case
+		if (n == 0){
+			return str;
+		}
+
+		return dragonHelper(str.replace("F", "A-B").replace("H", "A+B").replace("A", "F").replace("B", "H"), n-1);
 	}
 
 	
